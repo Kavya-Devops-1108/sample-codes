@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>✨ Luxury Hotel Booking - Book Your Dream Stay ✨</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        /* Header Styles */
+        .header {
+            background: linear-gradient(135deg, #ff6b6b, #4ecdc4);
+            color: white;
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            animation: slideDown 0.5s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.95;
+        }
+
+        /* Filter Section */
+        .filters {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            animation: fadeIn 0.6s ease;
+        }
+
+        .filter-group {
+            flex: 1;
+            min-width: 150px;
+        }
+
+        .filter-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .filter-group input, .filter-group select {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        .filter-group input:focus, .filter-group select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102,126,234,0.1);
+        }
+
+        button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        /* Hotels Grid */
+        .hotels-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .hotel-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            animation: fadeInUp 0.6s ease;
+        }
+
+        .hotel-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hotel-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .hotel-info {
+            padding: 20px;
+        }
+
+        .hotel-name {
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .hotel-location {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 0.9em;
+        }
+
+        .rating {
+            color: #ffc107;
+            margin-bottom: 10px;
+        }
+
+        .price {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #764ba2;
+            margin: 10px 0;
+        }
+
+        .amenities {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 15px 0;
+        }
+
+        .amenity-tag {
+            background: #f0f0f0;
+            padding: 4px 10px;
+            border-radius: 15px;
+            font-size: 0.8em;
+            color: #666;
+        }
+
+        .book-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+            margin-top: 10px;
+        }
+
+        /* Booking Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            animation: fadeIn 0.3s;
+        }
+
+        .modal-content {
+            background: white;
+            width: 90%;
+            max-width: 500px;
+            margin: 50px auto;
+            border-radius: 20px;
+            padding: 30px;
+            position: relative;
+            animation: slideUp 0.3s;
+            max-height: 85vh;
+            overflow-y: auto;
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 28px;
+            cursor: pointer;
+            color: #999;
+        }
+
+        .close:hover {
+            color: #333;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        .form-group input:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        /* My Bookings Section */
+        .bookings-section {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 30px;
+            animation: fadeIn 0.8s ease;
+        }
+
+        .bookings-section h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .booking-card {
+            background: #f9f9f9;
+            border-left: 4px solid #4ecdc4;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            transition: transform 0.2s;
+        }
+
+        .booking-card:hover {
+            transform: translateX(5px);
+        }
+
+        .booking-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .booking-hotel {
+            font-weight: bold;
+            color: #333;
+            font-size: 1.1em;
+        }
+
+        .booking-status {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: bold;
+        }
+
+        .status-confirmed {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status-cancelled {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .booking-details {
+            color: #666;
+            font-size: 0.9em;
+            margin: 5px 0;
+        }
+
+        .cancel-btn {
+            background: #dc3545;
+            padding: 5px 15px;
+            font-size: 12px;
+            margin-top: 10px;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #28a745;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 8px;
+            animation: slideInRight 0.3s;
+            z-index: 1100;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            font-size: 1.2em;
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .hotels-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .filters {
+                flex-direction: column;
+            }
+            
+            .header h1 {
+                font-size: 1.8em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏨✨ Luxury Hotel Booking ✨🏨</h1>
+            <p>Experience the finest stays at the best prices! 🌟</p>
+        </div>
+
+        <div class="filters">
+            <div class="filter-group">
+                <label>📍 Location</label>
+                <input type="text" id="locationFilter" placeholder="Search by city...">
+            </div>
+            <div class="filter-group">
+                <label>💰 Min Price</label>
+                <input type="number" id="minPriceFilter" placeholder="$">
+            </div>
+            <div class="filter-group">
+                <label>💰 Max Price</label>
+                <input type="number" id="maxPriceFilter" placeholder="$">
+            </div>
+            <div class="filter-group">
+                <label>&nbsp;</label>
+                <button onclick="searchHotels()">🔍 Search Hotels</button>
+            </div>
+        </div>
+
+        <div id="hotelsContainer" class="hotels-grid">
+            <div class="loading">Loading amazing hotels... ✨</div>
+        </div>
+
+        <div class="bookings-section">
+            <h2>📋 My Bookings</h2>
+            <div id="bookingsContainer">
+                <p>No bookings yet. Book your dream stay! 🏖️</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Booking Modal -->
+    <div id="bookingModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2 style="margin-bottom: 20px; color: #667eea;">🏨 Complete Your Booking</h2>
+            <form id="bookingForm">
+                <input type="hidden" id="bookingHotelId">
+                <div class="form-group">
+                    <label>Full Name *</label>
+                    <input type="text" id="guestName" required placeholder="John Doe">
+                </div>
+                <div class="form-group">
+                    <label>Email *</label>
+                    <input type="email" id="guestEmail" required placeholder="john@example.com">
+                </div>
+                <div class="form-group">
+                    <label>Phone Number *</label>
+                    <input type="tel" id="guestPhone" required placeholder="+1234567890">
+                </div>
+                <div class="form-group">
+                    <label>Check-in Date *</label>
+                    <input type="date" id="checkIn" required>
+                </div>
+                <div class="form-group">
+                    <label>Check-out Date *</label>
+                    <input type="date" id="checkOut" required>
+                </div>
+                <div class="form-group">
+                    <label>Number of Guests *</label>
+                    <input type="number" id="numberOfGuests" required min="1" max="10" value="2">
+                </div>
+                <div class="form-group">
+                    <label>Special Requests</label>
+                    <textarea id="specialRequests" rows="3" placeholder="Any special requirements?"></textarea>
+                </div>
+                <div id="pricePreview" style="background: #f0f0f0; padding: 15px; border-radius: 8px; margin: 15px 0; text-align: center;">
+                    <strong>Total Price: </strong> <span id="totalPrice">$0</span>
+                </div>
+                <button type="submit" style="width: 100%; padding: 15px; font-size: 16px;">✅ Confirm Booking</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        let currentHotelId = null;
+        let currentBookings = [];
+
+        // Load hotels on page load
+        window.onload = () => {
+            loadHotels();
+            loadUserBookings('guest@example.com'); // In production, get from user session
+        };
+
+        async function loadHotels() {
+            try {
+                const response = await fetch('/api/hotels');
+                const data = await response.json();
+                if (data.success) {
+                    displayHotels(data.data);
+                }
+            } catch (error) {
+                console.error('Error loading hotels:', error);
+                showToast('Failed to load hotels', 'error');
+            }
+        }
+
+        async function searchHotels() {
+            const location = document.getElementById('locationFilter').value;
+            const minPrice = document.getElementById('minPriceFilter').value;
+            const maxPrice = document.getElementById('maxPriceFilter').value;
+            
+            let url = '/api/hotels?';
+            if (location) url += `location=${location}&`;
+            if (minPrice) url += `minPrice=${minPrice}&`;
+            if (maxPrice) url += `maxPrice=${maxPrice}&`;
+            
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+                if (data.success) {
+                    displayHotels(data.data);
+                    showToast(`Found ${data.count} hotels! 🌟`, 'success');
+                }
+            } catch (error) {
+                console.error('Error searching hotels:', error);
+                showToast('Search failed', 'error');
+            }
+        }
+
+        function displayHotels(hotels) {
+            const container = document.getElementById('hotelsContainer');
+            if (!hotels || hotels.length === 0) {
+                container.innerHTML = '<div class="loading">No hotels found! 😢</div>';
+                return;
+            }
+            
+            container.innerHTML = hotels.map(hotel => `
+                <div class="hotel-card">
+                    <img src="${hotel.image}" alt="${hotel.name}" class="hotel-image">
+                    <div class="hotel-info">
+                        <div class="hotel-name">${hotel.name}</div>
+                        <div class="hotel-location">📍 ${hotel.location}</div>
+                        <div class="rating">${'⭐'.repeat(Math.floor(hotel.rating))} ${hotel.rating}</div>
+                        <div class="price">$${hotel.pricePerNight} / night</div>
+                        <div class="amenities">
+                            ${hotel.amenities.map(amenity => `<span class="amenity-tag">${amenity}</span>`).join('')}
+                        </div>
+                        <button class="book-btn" onclick="openBookingModal('${hotel.id}', '${hotel.name}', ${hotel.pricePerNight})">
+                            🏨 Book Now
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function openBookingModal(hotelId, hotelName, pricePerNight) {
+            currentHotelId = hotelId;
+            document.getElementById('bookingModal').style.display = 'block';
+            document.getElementById('bookingHotelId').value = hotelId;
+            
+            // Set min dates
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('checkIn').min = today;
+            document.getElementById('checkIn').value = '';
+            document.getElementById('checkOut').value = '';
+            
+            // Add price calculation
+            document.getElementById('checkIn').onchange = calculatePrice;
+            document.getElementById('checkOut').onchange = calculatePrice;
+            
+            window.currentPricePerNight = pricePerNight;
+        }
+
+        async function calculatePrice() {
+            const checkIn = document.getElementById('checkIn').value;
+            const checkOut = document.getElementById('checkOut').value;
+            
+            if (checkIn && checkOut && currentHotelId) {
+                try {
+                    const response = await fetch(`/api/hotels/${currentHotelId}/availability?checkIn=${checkIn}&checkOut=${checkOut}`);
+                    const data = await response.json();
+                    if (data.success && data.data.isAvailable) {
+                        document.getElementById('totalPrice').innerText = `$${data.data.totalPrice}`;
+                        showToast(`Available! $${data.data.totalPrice} for ${data.data.nights} nights`, 'success');
+                    } else {
+                        document.getElementById('totalPrice').innerText = 'Not available';
+                        showToast('Selected dates not available', 'error');
+                    }
+                } catch (error) {
+                    console.error('Error checking availability:', error);
+                }
+            }
+        }
+
+        document.getElementById('bookingForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const booking = {
+                hotelId: currentHotelId,
+                guestName: document.getElementById('guestName').value,
+                guestEmail: document.getElementById('guestEmail').value,
+                guestPhone: document.getElementById('guestPhone').value,
+                checkIn: document.getElementById('checkIn').value,
+                checkOut: document.getElementById('checkOut').value,
+                numberOfGuests: parseInt(document.getElementById('numberOfGuests').value),
+                specialRequests: document.getElementById('specialRequests').value
+            };
+            
+            try {
+                const response = await fetch('/api/bookings', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(booking)
+                });
+                
+                const data = await response.json();
+                if (data.success) {
+                    showToast('🎉 Booking confirmed! 🎉', 'success');
+                    closeModal();
+                    loadUserBookings(booking.guestEmail);
+                    document.getElementById('bookingForm').reset();
+                } else {
+                    showToast(data.message || 'Booking failed', 'error');
+                }
+            } catch (error) {
+                console.error('Error creating booking:', error);
+                showToast('Failed to create booking', 'error');
+            }
+        });
+
+        async function loadUserBookings(email) {
+            try {
+                const response = await fetch(`/api/bookings?email=${email}`);
+                const data = await response.json();
+                if (data.success) {
+                    currentBookings = data.data;
+                    displayBookings(data.data);
+                }
+            } catch (error) {
+                console.error('Error loading bookings:', error);
+            }
+        }
+
+        function displayBookings(bookings) {
+            const container = document.getElementById('bookingsContainer');
+            if (!bookings || bookings.length === 0) {
+                container.innerHTML = '<p>No bookings yet. Book your dream stay! 🏖️</p>';
+                return;
+            }
+            
+            container.innerHTML = bookings.map(booking => `
+                <div class="booking-card">
+                    <div class="booking-header">
+                        <span class="booking-hotel">🏨 ${booking.hotelName}</span>
+                        <span class="booking-status status-${booking.status}">${booking.status.toUpperCase()}</span>
+                    </div>
+                    <div class="booking-details">📅 ${new Date(booking.checkIn).toLocaleDateString()} - ${new Date(booking.checkOut).toLocaleDateString()}</div>
+                    <div class="booking-details">👥 ${booking.numberOfGuests} guests • ${booking.nights} nights</div>
+                    <div class="booking-details">💰 Total: $${booking.totalPrice}</div>
+                    <div class="booking-details">📧 ${booking.guestEmail}</div>
+                    ${booking.status === 'confirmed' ? `<button class="cancel-btn" onclick="cancelBooking('${booking.id}')">❌ Cancel Booking</button>` : ''}
+                </div>
+            `).join('');
+        }
+
+        async function cancelBooking(bookingId) {
+            if (confirm('Are you sure you want to cancel this booking?')) {
+                try {
+                    const response = await fetch(`/api/bookings/${bookingId}`, { method: 'DELETE' });
+                    const data = await response.json();
+                    if (data.success) {
+                        showToast('Booking cancelled successfully', 'success');
+                        loadUserBookings('guest@example.com');
+                    } else {
+                        showToast('Failed to cancel booking', 'error');
+                    }
+                } catch (error) {
+                    console.error('Error cancelling booking:', error);
+                    showToast('Failed to cancel booking', 'error');
+                }
+            }
+        }
+
+        function closeModal() {
+            document.getElementById('bookingModal').style.display = 'none';
+        }
+
+        function showToast(message, type = 'success') {
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.style.backgroundColor = type === 'success' ? '#28a745' : '#dc3545';
+            toast.textContent = message;
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), 3000);
+        }
+
+        // Close modal when clicking outside
+        window.onclick = (event) => {
+            const modal = document.getElementById('bookingModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        };
+    </script>
+</body>
+</html>
