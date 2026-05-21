@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Wonders of the World | Famous Places to Visit</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: linear-gradient(145deg, #f5f7fc 0%, #eef2f5 100%);
+            color: #1e2a3e;
+            line-height: 1.5;
+            padding: 2rem 1rem;
+        }
+
+        /* main container */
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            background: rgba(255,255,255,0.75);
+            border-radius: 2.5rem;
+            backdrop-filter: blur(0px);
+            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.1);
+            padding: 2rem 1.5rem;
+        }
+
+        /* header styling */
+        .page-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+            border-bottom: 3px solid #ffb74d;
+            display: inline-block;
+            width: 100%;
+        }
+        h1 {
+            font-size: 2.6rem;
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, #2c3e66, #1e4a6e);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            margin-bottom: 0.5rem;
+        }
+        .subhead {
+            color: #2c5368;
+            font-weight: 500;
+            font-size: 1.15rem;
+            margin-bottom: 1rem;
+            border-top: 1px solid #cbd5e1;
+            display: inline-block;
+            padding-top: 0.75rem;
+        }
+
+        /* grid system: responsive cards */
+        .places-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0 1rem;
+        }
+
+        /* card design */
+        .place-card {
+            background: #ffffff;
+            border-radius: 1.75rem;
+            overflow: hidden;
+            box-shadow: 0 12px 24px -8px rgba(0, 0, 0, 0.12);
+            transition: all 0.25s ease-in-out;
+            display: flex;
+            flex-direction: column;
+            backdrop-filter: blur(0px);
+            border: 1px solid rgba(255,255,240,0.6);
+        }
+        .place-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 24px 36px -12px rgba(0, 0, 0, 0.2);
+        }
+
+        /* image placeholder */
+        .card-img {
+            width: 100%;
+            height: 210px;
+            object-fit: cover;
+            background-color: #cbd5e6;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+        .place-card:hover .card-img {
+            transform: scale(1.02);
+        }
+
+        /* card content */
+        .card-content {
+            padding: 1.4rem 1.3rem 1.8rem;
+            flex: 1;
+        }
+        .place-name {
+            font-size: 1.65rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: #0f2b3d;
+            letter-spacing: -0.3px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .location {
+            font-size: 0.85rem;
+            font-weight: 500;
+            background: #eef2ff;
+            display: inline-block;
+            padding: 0.2rem 0.8rem;
+            border-radius: 40px;
+            color: #1e4a76;
+            margin-bottom: 0.8rem;
+            letter-spacing: 0.3px;
+        }
+        .description {
+            color: #2c3e50;
+            font-size: 0.95rem;
+            margin: 0.8rem 0 1rem;
+            line-height: 1.45;
+        }
+        .fun-fact {
+            background: #fef9e6;
+            border-left: 4px solid #ffb347;
+            padding: 0.6rem 0.8rem;
+            font-size: 0.8rem;
+            color: #7a5a2c;
+            border-radius: 12px;
+            margin-top: 0.6rem;
+            font-style: italic;
+        }
+
+        /* footer section */
+        .footer-note {
+            margin-top: 3rem;
+            text-align: center;
+            font-size: 0.85rem;
+            color: #4a627a;
+            background: rgba(235, 245, 255, 0.7);
+            padding: 1rem;
+            border-radius: 3rem;
+            border-top: 1px solid #dce5f0;
+        }
+        .footer-note a {
+            color: #2266aa;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .footer-note a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 680px) {
+            .container {
+                padding: 1rem;
+            }
+            h1 {
+                font-size: 2rem;
+            }
+            .place-name {
+                font-size: 1.4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="page-header">
+        <h1>🗺️ iconic places around the world</h1>
+        <div class="subhead">✦ timeless landmarks & natural wonders ✦</div>
+    </div>
+
+    <div class="places-grid">
+        <!-- 1. Taj Mahal -->
+        <div class="place-card">
+            <img class="card-img" 
+                 src="https://cdn.pixabay.com/photo/2019/05/07/14/46/taj-mahal-4186092_640.jpg" 
+                 alt="Taj Mahal, Agra" 
+                 onerror="this.onerror=null; this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/Taj_Mahal_%28Edited%29.jpeg/640px-Taj_Mahal_%28Edited%29.jpeg';">
+            <div class="card-content">
+                <div class="place-name">🕌 Taj Mahal</div>
+                <div class="location">📍 Agra, India</div>
+                <div class="description">
+                    A breathtaking ivory-white marble mausoleum built by Emperor Shah Jahan in memory of his wife Mumtaz Mahal. 
+                    It’s a masterpiece of Mughal architecture and a UNESCO World Heritage Site.
+                </div>
+                <div class="fun-fact">✨ Fun fact: The color of the Taj Mahal changes subtly throughout the day — from pinkish in the morning to golden at night.</div>
+            </div>
+        </div>
+
+        <!-- 2. Great Wall of China -->
+        <div class="place-card">
+            <img class="card-img" 
+                 src="https://cdn.pixabay.com/photo/2017/04/27/09/03/great-wall-2263126_640.jpg" 
+                 alt="Great Wall of China" 
+                 onerror="this.onerror=null; this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/The_Great_Wall_of_China_at_Jinshanling.jpg/640px-The_Great_Wall_of_China_at_Jinshanling.jpg';">
+            <div class="card-content">
+                <div class="place-name">🏯 Great Wall of China</div>
+                <div class="location">📍 Northern China</div>
+                <div class="description">
+                    Stretching over 21,000 kilometers, this ancient series of walls and fortifications was built to protect Chinese states. 
+                    A true engineering marvel visible from space under perfect conditions.
+                </div>
+                <div class="fun-fact">🐉 Fun fact: Contrary to popular myth, the Great Wall cannot be seen from the Moon with the naked eye — but it's an unforgettable earthbound wonder!</div>
+            </div>
+        </div>
+
+        <!-- 3. Machu Picchu -->
+        <div class="place-card">
+            <img class="card-img" 
+                 src="https://cdn.pixabay.com/photo/2018/03/12/18/58/machu-picchu-3219208_640.jpg" 
+                 alt="Machu Picchu" 
+                 onerror="this.onerror=null; this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Machu_Picchu%2C_Peru.jpg/640px-Machu_Picchu%2C_Peru.jpg';">
+            <div class="card-content">
+                <div class="place-name">⛰️ Machu Picchu</div>
+                <div class="location">📍 Cusco Region, Peru</div>
+                <div class="description">
+                    The legendary 15th-century Inca citadel nestled high in the Andes mountains. Known for its dry-stone walls, 
+                    advanced astronomy, and breathtaking panoramic views.
+                </div>
+                <div class="fun-fact">🦙 Fun fact: Machu Picchu was never lost to the Incas, but it remained unknown to the outside world until American historian Hiram Bingham brought it to global attention in 1911.</div>
+            </div>
+        </div>
+
+        <!-- 4. Colosseum -->
+        <div class="place-card">
+            <img class="card-img" 
+                 src="https://cdn.pixabay.com/photo/2017/06/28/18/46/colosseum-2451365_640.jpg" 
+                 alt="Roman Colosseum" 
+                 onerror="this.onerror=null; this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Colosseo_2020.jpg/640px-Colosseo_2020.jpg';">
+            <div class="card-content">
+                <div class="place-name">🏟️ Colosseum</div>
+                <div class="location">📍 Rome, Italy</div>
+                <div class="description">
+                    The largest ancient amphitheater ever built, capable of hosting 50,000 spectators. It witnessed gladiatorial contests, 
+                    dramas, and spectacles that defined Roman entertainment.
+                </div>
+                <div class="fun-fact">🏛️ Fun fact: The Colosseum had a retractable canvas roof called the "velarium" to protect spectators from sun or rain — ancient innovation!</div>
+            </div>
+        </div>
+
+        <!-- 5. Petra -->
+        <div class="place-card">
+            <img class="card-img" 
+                 src="https://cdn.pixabay.com/photo/2018/04/21/16/01/petra-3337256_640.jpg" 
+                 alt="Petra Jordan" 
+                 onerror="this.onerror=null; this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Treasury_petra_crop.jpg/640px-Treasury_petra_crop.jpg';">
+            <div class="card-content">
+                <div class="place-name">🏺 Petra</div>
+                <div class="location">📍 Ma'an Governorate, Jordan</div>
+                <div class="description">
+                    An archeological city famous for its rock-cut architecture and water conduit system. Also known as the "Rose City" 
+                    due to the pink sandstone cliffs.
+                </div>
+                <div class="fun-fact">🌹 Fun fact: Petra appears in famous movies like "Indiana Jones and the Last Crusade" — the iconic treasury facade is a cinematic legend.</div>
+            </div>
+        </div>
+
+        <!-- 6. Eiffel Tower -->
+        <div class="place-card">
+            <img class="card-img" 
+                 src="https://cdn.pixabay.com/photo/2018/04/26/22/58/eiffel-tower-3352514_640.jpg" 
+                 alt="Eiffel Tower Paris" 
+                 onerror="this.onerror=null; this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Tour_Eiffel_Wikimedia_Commons_%28cropped%29.jpg/640px-Tour_Eiffel_Wikimedia_Commons_%28cropped%29.jpg';">
+            <div class="card-content">
+                <div class="place-name">🗼 Eiffel Tower</div>
+                <div class="location">📍 Paris, France</div>
+                <div class="description">
+                    An iconic wrought-iron lattice tower built for the 1889 World's Fair. It's the most-visited paid monument in the world 
+                    and a global symbol of romance and art de vivre.
+                </div>
+                <div class="fun-fact">🎨 Fun fact: Gustave Eiffel had a secret apartment at the top of the tower where he entertained guests like Thomas Edison.</div>
+            </div>
+        </div>
+
+        <!-- 7. Christ the Redeemer -->
+        <div class="place-card">
+            <img class="card-img" 
+                 src="https://cdn.pixabay.com/photo/2014/10/19/20/59/rio-de-janeiro-494551_640.jpg" 
+                 alt="Christ the Redeemer Rio" 
+                 onerror="this.onerror=null; this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Christ_the_Redeemer_-_statue.jpg/640px-Christ_the_Redeemer_-_statue.jpg';">
+            <div class="card-content">
+                <div class="place-name">✝️ Christ the Redeemer</div>
+                <div class="location">📍 Rio de Janeiro, Brazil</div>
+                <div class="description">
+                    An iconic Art Deco statue of Jesus Christ overlooking the city. Standing 30 meters tall atop Corcovado mountain, 
+                    it's a powerful symbol of Brazilian Christianity and hospitality.
+                </div>
+                <div class="fun-fact">⚡ Fun fact: The statue gets struck by lightning several times a year, requiring frequent restoration — but remains majestic!</div>
+            </div>
+        </div>
+
+        <!-- 8. Sydney Opera House -->
+        <div class="place-card">
+            <img class="card-img" 
+                 src="https://cdn.pixabay.com/photo/2014/11/21/17/24/sydney-opera-house-540894_640.jpg" 
+                 alt="Sydney Opera House" 
+                 onerror="this.onerror=null; this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Sydney_Opera_House_SOH_2017-09-21.jpg/640px-Sydney_Opera_House_SOH_2017-09-21.jpg';">
+            <div class="card-content">
+                <div class="place-name">🎭 Sydney Opera House</div>
+                <div class="location">📍 Sydney, Australia</div>
+                <div class="description">
+                    A multi-venue performing arts center famous for its unique shell-like design. It’s a masterpiece of 20th-century 
+                    architecture and a UNESCO World Heritage Site.
+                </div>
+                <div class="fun-fact">🌊 Fun fact: The roof shells are made of over 1 million tiles, and they were designed using principles of spherical geometry.</div>
+            </div>
+        </div>
+
+        <!-- 9. Grand Canyon -->
+        <div class="place-card">
+            <img class="card-img" 
+                 src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_640.jpg" 
+                 alt="Grand Canyon Arizona" 
+                 onerror="this.onerror=null; this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/Grand_Canyon_National_Park_%28%2826029102323%29%29.jpg/640px-Grand_Canyon_National_Park_%28%2826029102323%29%29.jpg';">
+            <div class="card-content">
+                <div class="place-name">🏜️ Grand Canyon</div>
+                <div class="location">📍 Arizona, USA</div>
+                <div class="description">
+                    A colossal steep-sided canyon carved by the Colorado River. It reveals nearly 2 billion years of Earth's geological 
+                    history with dramatic colors and deep vistas.
+                </div>
+                <div class="fun-fact">⛰️ Fun fact: The Grand Canyon is not the deepest or longest canyon in the world, but it’s among the most spectacular due to its immense scale and intricate landscape.</div>
+            </div>
+        </div>
+
+        <!-- 10. Sagrada Familia -->
+        <div class="place-card">
+            <img class="card-img" 
+                 src="https://cdn.pixabay.com/photo/2019/06/24/19/17/sagrada-familia-4296356_640.jpg" 
+                 alt="Sagrada Familia Barcelona" 
+                 onerror="this.onerror=null; this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Sagrada_Familia_01.jpg/640px-Sagrada_Familia_01.jpg';">
+            <div class="card-content">
+                <div class="place-name">⛪ Sagrada Família</div>
+                <div class="location">📍 Barcelona, Spain</div>
+                <div class="description">
+                    A massive unfinished Roman Catholic basilica designed by Antoni Gaudí. Its intricate facades and organic architecture 
+                    attract millions, and completion is expected by 2030s.
+                </div>
+                <div class="fun-fact">🔨 Fun fact: Construction began in 1882 and it’s still ongoing — making it one of the world’s longest-running architectural projects!</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-note">
+        🌍 Discover more wonders — every destination has a story. <br>
+        📸 Images represent these iconic landmarks | Data & facts for inspiration | <a href="#" aria-label="Learn more about world heritage">Explore responsible travel</a>
+    </div>
+</div>
+</body>
+</html>
